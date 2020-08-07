@@ -29,7 +29,6 @@
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".GameOver"></activity>
     </application>
 
 </manifest>

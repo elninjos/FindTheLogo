@@ -1,16 +1,11 @@
-package nino.findthelogo.AllData;
+package nino.findthelogo;
 
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import nino.findthelogo.Game;
-import nino.findthelogo.OnClickCup;
-import nino.findthelogo.OnClickStart;
 
 public class StaticData {
     // CLASSES
@@ -47,25 +42,13 @@ public class StaticData {
     public static Button no;
     public static TextView gameOver;
 
-
-    public static OnClickStart ocs = null;
-    public static OnClickCup occ = null;
-
-    // endregion
-
-    // region ON CLICK CUP
-
     public static boolean firstCupClicked = false;
     public static boolean secondCupClicked = false;
     public static boolean thirdCupClicked = false;
-    public static View firstCupView;
-    public static View secondCupView;
-    public static View thirdCupView;
+
+    public static int randLogo;
 
     // endregion
-
-
-    //OTHER
 
     // region FONTS
 
