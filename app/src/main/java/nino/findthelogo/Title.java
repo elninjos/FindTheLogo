@@ -81,12 +81,12 @@ public class Title extends AppCompatActivity {
     }
 
     public void onClickPlay(View view){
-        Intent openGame = new Intent(this, Game.class);
-        startActivity(openGame);
+        StaticData.gameWindow = new Intent(this, Game.class);
+        startActivity(StaticData.gameWindow);
     }
 
     public void onClickInstructions(View view){
-        Intent openInstructions = new Intent(this, Instructions.class);
-        startActivity(openInstructions);
+        StaticData.instructionsWindow = new Intent(this, Instructions.class);
+        startActivity(StaticData.instructionsWindow);
     }
 }

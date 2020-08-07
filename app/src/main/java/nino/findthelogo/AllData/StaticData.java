@@ -1,5 +1,6 @@
 package nino.findthelogo.AllData;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.view.View;
 import android.widget.Button;
@@ -7,8 +8,19 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import nino.findthelogo.Game;
+import nino.findthelogo.OnClickCup;
+import nino.findthelogo.OnClickStart;
+
 public class StaticData {
     // CLASSES
+
+    // region TITLE
+
+    public static Intent gameWindow = null;
+    public static Intent instructionsWindow = null;
+
+    // endregion
 
     // region INSTRUCTIONS
 
@@ -34,6 +46,10 @@ public class StaticData {
     public static Button yes;
     public static Button no;
     public static TextView gameOver;
+
+
+    public static OnClickStart ocs = null;
+    public static OnClickCup occ = null;
 
     // endregion
 
