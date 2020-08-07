@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="nino.findthelogo.Game"
+    android:id="@+id/layoutGame"
+    android:clickable="false"
+    android:focusableInTouchMode="false"
+    android:nestedScrollingEnabled="false">
+
+    <ImageButton
+        android:id="@+id/firstCup"
+        android:layout_width="152dp"
+        android:layout_height="190dp"
+        android:scaleType="fitCenter"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="40dp"
+        android:visibility="invisible"
+        android:onClick="onClickCup"/>
+
+    <ImageButton
+        android:id="@+id/secondCup"
+        android:layout_width="152dp"
+        android:layout_height="190dp"
+        android:layout_marginTop="200dp"
+        android:layout_centerHorizontal="true"
+        android:scaleType="fitCenter"
+        android:visibility="invisible"
+        android:onClick="onClickCup"/>
+
+    <ImageButton
+        android:id="@+id/thirdCup"
+        android:layout_width="152dp"
+        android:layout_height="190dp"
+        android:scaleType="fitCenter"
+        android:layout_marginTop="200dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="40dp"
+        android:visibility="invisible"
+        android:onClick="onClickCup"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Touch the screen to start!"
+        android:id="@+id/start"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:textSize="30dp"
+        android:background="@null"
+        android:textColor="#ffffff"
+        android:onClick="onClickStart"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageButton
+        android:id="@+id/logo1"
+        android:layout_width="152dp"
+        android:layout_height="152dp"
+        android:scaleType="fitCenter"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="40dp"
+        android:visibility="invisible" />
+
+    <ImageButton
+        android:id="@+id/logo2"
+        android:layout_width="152dp"
+        android:layout_height="152dp"
+        android:layout_marginTop="200dp"
+        android:layout_centerHorizontal="true"
+        android:scaleType="fitCenter"
+        android:visibility="invisible" />
+
+    <ImageButton
+        android:id="@+id/logo3"
+        android:layout_width="152dp"
+        android:layout_height="152dp"
+        android:scaleType="fitCenter"
+        android:layout_marginTop="200dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="40dp"
+        android:visibility="invisible" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/logoName"
+        android:textSize="50dp"
+        android:textColor="#00A2E8"
+        android:layout_marginTop="22dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"/>
+
+    <RelativeLayout
+        android:id="@+id/popUp"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:background="@drawable/background"
+        android:visibility="invisible"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Play again?"
+            android:textSize="110dp"
+            android:textColor="#00A2E8"
+            android:id="@+id/gameOver"
+            android:layout_marginTop="20dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:width="200dp"
+            android:height="67dp"
+            android:textSize="30dp"
+            android:text="Yes"
+            android:id="@+id/yes"
+            android:background="@drawable/mybutton"
+            android:layout_marginStart="31dp"
+            android:onClick="onClickYes"
+            android:layout_alignTop="@+id/no"
+            android:layout_alignStart="@+id/gameOver" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:width="200dp"
+            android:height="67dp"
+            android:textSize="30dp"
+            android:text="No"
+            android:id="@+id/no"
+            android:background="@drawable/mybutton"
+            android:layout_marginEnd="29dp"
+            android:onClick="onClickNo"
+            android:layout_below="@+id/gameOver"
+            android:layout_alignEnd="@+id/gameOver"
+            android:layout_marginTop="43dp" />
+    </RelativeLayout>
+
+</RelativeLayout>

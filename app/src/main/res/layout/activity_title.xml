@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="nino.findthelogo.Title">
+
+    <Button
+        android:id="@+id/playButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="200dp"
+        android:height="67dp"
+        android:background="@drawable/mybutton"
+        android:layout_centerInParent="true"
+        android:textSize="30dp"
+        android:textColor="#ffffff"
+        android:text="PLAY NOW!"
+        android:onClick="onClickPlay" />
+
+    <ImageButton
+        android:id="@+id/info"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/playButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:onClick="onClickInstructions"/>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="FindTheLogo"
+        android:textSize="110dp"
+        android:textColor="#00A2E8"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>
