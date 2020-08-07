@@ -14,9 +14,9 @@
         android:height="67dp"
         android:background="@drawable/mybutton"
         android:layout_centerInParent="true"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:textColor="#ffffff"
-        android:text="PLAY NOW!"
+        android:text="@string/play_now"
         android:onClick="onClickPlay" />
 
     <ImageButton
@@ -26,15 +26,15 @@
         android:layout_below="@+id/playButton"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
-        android:onClick="onClickInstructions"/>
+        android:onClick="onClickInstructions" />
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="FindTheLogo"
-        android:textSize="110dp"
+        android:text="@string/findthelogo"
+        android:textSize="70sp"
         android:textColor="#00A2E8"
         android:layout_centerHorizontal="true"/>
 

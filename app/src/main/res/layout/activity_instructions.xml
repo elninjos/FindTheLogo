@@ -7,6 +7,18 @@
     tools:context="nino.findthelogo.Instructions">
 
     <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/instructions"
+        android:layout_marginTop="12dp"
+        android:textSize="60sp"
+        android:textColor="#00A2E8"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
         android:id="@+id/instructions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -14,20 +26,9 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:textColor="#00A2E8"
-        android:textSize="25dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="139dp" />
-
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="INSTRUCTIONS"
-        android:layout_marginTop="22dp"
-        android:textSize="80dp"
-        android:textColor="#00A2E8"
+        android:textSize="15sp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp" />
+
 </RelativeLayout>

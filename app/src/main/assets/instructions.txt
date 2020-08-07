@@ -1,0 +1,1 @@
+When you press the button "Touch to start", glasses will move up. You'll see logos now. When glasses move down, the name of the right logo will be shown. Then you have to choose the right logo, which is hidden under the one of those glasses.
