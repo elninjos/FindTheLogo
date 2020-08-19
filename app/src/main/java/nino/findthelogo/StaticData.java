@@ -47,6 +47,9 @@ public class StaticData {
     public static boolean thirdCupClicked = false;
 
     public static int randLogo;
+    public static int first;
+    public static int second;
+    public static int third;
 
     // endregion
 

@@ -98,101 +98,83 @@ public class Game extends AppCompatActivity {
     }
 
     public void onClickStart(View view){
-        //Animacija postane boljša
+        // Animation becomes better
         TransitionManager.beginDelayedTransition(StaticData.layoutGame);
 
-        //Skrije gumb
+        // Hide start button
         StaticData.start.setVisibility(View.GONE);
 
-        //Prikaže loncke
+        // Show cups
         StaticData.firstCup.setVisibility(View.VISIBLE);
         StaticData.secondCup.setVisibility(View.VISIBLE);
         StaticData.thirdCup.setVisibility(View.VISIBLE);
 
-        //Random za logotipe
+        //Random for logotypes
         checkRandom();
 
         //Po 1 sekundi loncke dvigne
-        new Timer().schedule(
-            new TimerTask() {
-            @Override
-                public void run() {
-                    StaticData.cupsUp = true;
-                    changePositionOfCup(StaticData.firstCup);
-                    changePositionOfCup(StaticData.secondCup);
-                    changePositionOfCup(StaticData.thirdCup);
-                    changeSizeOfCup(StaticData.firstCup);
-                    changeSizeOfCup(StaticData.secondCup);
-                    changeSizeOfCup(StaticData.thirdCup);
-                    StaticData.logo1.setBackgroundResource(getFirstLogo());
-                    StaticData.logo2.setBackgroundResource(getSecondLogo());
-                    StaticData.logo3.setBackgroundResource(getThirdLogo());
-                    StaticData.logo1.setVisibility(View.VISIBLE);
-                    StaticData.logo2.setVisibility(View.VISIBLE);
-                    StaticData.logo3.setVisibility(View.VISIBLE);
-                }
-            },
-        1000
-        );
+        new Handler().postDelayed(new Runnable() {
+            public void run() {
+                StaticData.cupsUp = true;
+                changePositionOfCup(StaticData.firstCup);
+                changePositionOfCup(StaticData.secondCup);
+                changePositionOfCup(StaticData.thirdCup);
+                changeSizeOfCup(StaticData.firstCup);
+                changeSizeOfCup(StaticData.secondCup);
+                changeSizeOfCup(StaticData.thirdCup);
+                StaticData.logo1.setBackgroundResource(StaticData.first);
+                StaticData.logo2.setBackgroundResource(StaticData.second);
+                StaticData.logo3.setBackgroundResource(StaticData.third);
+                StaticData.logo1.setVisibility(View.VISIBLE);
+                StaticData.logo2.setVisibility(View.VISIBLE);
+                StaticData.logo3.setVisibility(View.VISIBLE);
+            }
+        }, 1000);
 
         //Po 3 sekundah loncke nazaj spusti
-        new Timer().schedule(
-                new TimerTask() {
-                    @Override
-                    public void run() {
-                        StaticData.cupsUp = false;
-                        changePositionOfCupToFirstPosition(StaticData.firstCup);
-                        changePositionOfCupToFirstPosition(StaticData.secondCup);
-                        changePositionOfCupToFirstPosition(StaticData.thirdCup);
-                        changeSizeOfCup(StaticData.firstCup);
-                        changeSizeOfCup(StaticData.secondCup);
-                        changeSizeOfCup(StaticData.thirdCup);
-                        StaticData.logo1.setVisibility(View.INVISIBLE);
-                        StaticData.logo2.setVisibility(View.INVISIBLE);
-                        StaticData.logo3.setVisibility(View.INVISIBLE);
-                    }
-                },
-                3000
-        );
+        new Handler().postDelayed(new Runnable() {
+            public void run() {
+                StaticData.cupsUp = false;
+                changePositionOfCupToFirstPosition(StaticData.firstCup);
+                changePositionOfCupToFirstPosition(StaticData.secondCup);
+                changePositionOfCupToFirstPosition(StaticData.thirdCup);
+                changeSizeOfCup(StaticData.firstCup);
+                changeSizeOfCup(StaticData.secondCup);
+                changeSizeOfCup(StaticData.thirdCup);
+                StaticData.logo1.setVisibility(View.INVISIBLE);
+                StaticData.logo2.setVisibility(View.INVISIBLE);
+                StaticData.logo3.setVisibility(View.INVISIBLE);
+            }
+        }, 3000);
 
         //Po 4 sekundah prikaže ime logotipa
-        new Timer().schedule(
-                new TimerTask() {
-                    @Override
-                    public void run() {
-                        StaticData.logoName.setVisibility(View.VISIBLE);
-                    }
-                },
-                4000
-        );
+        new Handler().postDelayed(new Runnable() {
+            public void run() {
+                StaticData.logoName.setVisibility(View.VISIBLE);
+            }
+        }, 4000);
     }
 
     public void onClickCup(View view){
+        StaticData.logoName.setVisibility(View.INVISIBLE);
+        TransitionManager.beginDelayedTransition(StaticData.layoutGame);
+
         if(!StaticData.cupIsUp) {
-            StaticData.logoName.setVisibility(View.INVISIBLE);
-            TransitionManager.beginDelayedTransition(StaticData.layoutGame);
             changePositionOfCup(StaticData.firstCup);
-            StaticData.cupIsUp = true;
             changeSizeOfCup(StaticData.firstCup);
             StaticData.logo1.setVisibility(View.VISIBLE);
             StaticData.firstCupClicked = true;
         }
 
         if(!StaticData.cupIsUp) {
-            StaticData.logoName.setVisibility(View.INVISIBLE);
-            TransitionManager.beginDelayedTransition(StaticData.layoutGame);
             changePositionOfCup(StaticData.secondCup);
-            StaticData.cupIsUp = true;
             changeSizeOfCup(StaticData.secondCup);
             StaticData.logo2.setVisibility(View.VISIBLE);
             StaticData.secondCupClicked = true;
         }
 
         if(!StaticData.cupIsUp) {
-            StaticData.logoName.setVisibility(View.INVISIBLE);
-            TransitionManager.beginDelayedTransition(StaticData.layoutGame);
             changePositionOfCup(StaticData.thirdCup);
-            StaticData.cupIsUp = true;
             changeSizeOfCup(StaticData.thirdCup);
             StaticData.logo3.setVisibility(View.VISIBLE);
             StaticData.thirdCupClicked = true;
@@ -257,137 +239,146 @@ public class Game extends AppCompatActivity {
         }
     }
 
-        char[] tab = new char[10];
-        int first, second, third;
-        int rand;
+    public void checkRandom(){
+        boolean[] tab = new boolean[10];
+        int rand = (int)(Math.random() * 10 + 0);
 
-        public void checkRandom(){
-            rand = (int)(Math.random()*10+0);
-            if(tab[rand]!='x'){
-                tab[rand]='x';
-                setLogos();
-            }
-            else if(tab[rand]=='x'){
-                checkRandom();
-            }
-            else if(tab[0]=='x'&&tab[1]=='x'&&tab[2]=='x'&&tab[3]=='x'&&tab[4]=='x'&&tab[5]=='x'&&tab[6]=='x'&&tab[7]=='x'&&tab[8]=='x'&&tab[9]=='x') {
-                gameOver();
-            }
+        if(!tab[rand]){
+            tab[rand] = true;
+            setLogos(rand);
         }
-
-    public void setLogos(){
-        StaticData.randLogo = (int) (Math.random()*3+1);
-        if(rand == 0) {
-            first = R.drawable.x01;
-            second = R.drawable.x02;
-            third = R.drawable.x03;
-
-            if(StaticData.randLogo == 1) StaticData.logoName.setText("NIKE");
-            else if(StaticData.randLogo == 2) StaticData.logoName.setText("ADIDAS");
-            else if(StaticData.randLogo == 3) StaticData.logoName.setText("PUMA");
+        else if(tab[rand]){
+            checkRandom();
         }
-
-        else if(rand == 1) {
-            first = R.drawable.x11;
-            second = R.drawable.x12;
-            third = R.drawable.x13;
-
-            if(StaticData.randLogo == 1) StaticData.logoName.setText("BARCELONA");
-            else if(StaticData.randLogo == 2) StaticData.logoName.setText("LIVERPOOL");
-            else if(StaticData.randLogo == 3) StaticData.logoName.setText("MILAN");
-        }
-
-        else if(rand == 2) {
-            first = R.drawable.x21;
-            second = R.drawable.x22;
-            third = R.drawable.x23;
-
-            if(StaticData.randLogo == 1) StaticData.logoName.setText("CSKA");
-            else if(StaticData.randLogo == 2) StaticData.logoName.setText("REAL MADRID");
-            else if(StaticData.randLogo == 3) StaticData.logoName.setText("PANATHINAIKOS");
-        }
-
-        else if(rand == 3) {
-            first = R.drawable.x31;
-            second = R.drawable.x32;
-            third = R.drawable.x33;
-
-            if(StaticData.randLogo == 1) StaticData.logoName.setText("AUDI");
-            else if(StaticData.randLogo == 2) StaticData.logoName.setText("VOLKSWAGEN");
-            else if(StaticData.randLogo == 3) StaticData.logoName.setText("CHEVROLET");
-        }
-
-        else if(rand == 4) {
-            first = R.drawable.x41;
-            second = R.drawable.x42;
-            third = R.drawable.x43;
-
-            if(StaticData.randLogo == 1) StaticData.logoName.setText("SAAB");
-            else if(StaticData.randLogo == 2) StaticData.logoName.setText("MERCEDES");
-            else if(StaticData.randLogo == 3) StaticData.logoName.setText("VOLVO");
-        }
-
-        else if(rand == 5) {
-            first = R.drawable.x51;
-            second = R.drawable.x52;
-            third = R.drawable.x53;
-
-            if(StaticData.randLogo == 1) StaticData.logoName.setText("TWITTER");
-            else if(StaticData.randLogo == 2) StaticData.logoName.setText("GMAIL");
-            else if(StaticData.randLogo == 3) StaticData.logoName.setText("TUMBLR");
-        }
-
-        else if(rand == 6) {
-            first = R.drawable.x61;
-            second = R.drawable.x62;
-            third = R.drawable.x63;
-
-            if(StaticData.randLogo == 1) StaticData.logoName.setText("YOUTUBE");
-            else if(StaticData.randLogo == 2) StaticData.logoName.setText("INSTAGRAM");
-            else if(StaticData.randLogo == 3) StaticData.logoName.setText("SNAPCHAT");
-        }
-
-        else if(rand == 7) {
-            first = R.drawable.x71;
-            second = R.drawable.x72;
-            third = R.drawable.x73;
-
-            if(StaticData.randLogo == 1) StaticData.logoName.setText("DUCATI");
-            else if(StaticData.randLogo == 2) StaticData.logoName.setText("YAMAHA");
-            else if(StaticData.randLogo == 3) StaticData.logoName.setText("SUZUKI");
-        }
-
-        else if(rand == 8) {
-            first = R.drawable.x81;
-            second = R.drawable.x82;
-            third = R.drawable.x83;
-
-            if(StaticData.randLogo == 1) StaticData.logoName.setText("ANDROID STUDIO");
-            else if(StaticData.randLogo == 2) StaticData.logoName.setText("ECLIPSE");
-            else if(StaticData.randLogo == 3) StaticData.logoName.setText("NET BEANS");
-        }
-
-        else if(rand == 9) {
-            first = R.drawable.x91;
-            second = R.drawable.x92;
-            third = R.drawable.x93;
-
-            if(StaticData.randLogo == 1) StaticData.logoName.setText("TREK");
-            else if(StaticData.randLogo == 2) StaticData.logoName.setText("SCOTT");
-            else if(StaticData.randLogo == 3) StaticData.logoName.setText("KONA");
+        else if(tab[0] && tab[1] && tab[2] && tab[3] && tab[4] && tab[5] && tab[6] && tab[7] && tab[8] && tab[9]) {
+            gameOver();
         }
     }
 
-    public int getFirstLogo() {
-        return first;
-    }
+    public void setLogos(int rand){
+        StaticData.randLogo = (int) (Math.random() * 3 + 1);
 
-    public int getSecondLogo() {
-        return second;
-    }
+        switch (rand){
+            case 0:
+                StaticData.first = R.drawable.x01;
+                StaticData.second = R.drawable.x02;
+                StaticData.third = R.drawable.x03;
 
-    public int getThirdLogo() {
-        return third;
+                switch (StaticData.randLogo){
+                    case 1: StaticData.logoName.setText("NIKE"); break;
+                    case 2: StaticData.logoName.setText("ADIDAS"); break;
+                    case 3: StaticData.logoName.setText("PUMA"); break;
+                }
+                break;
+
+            case 1:
+                StaticData.first = R.drawable.x11;
+                StaticData.second = R.drawable.x12;
+                StaticData.third = R.drawable.x13;
+
+                switch (StaticData.randLogo){
+                    case 1: StaticData.logoName.setText("BARCELONA"); break;
+                    case 2: StaticData.logoName.setText("LIVERPOOL"); break;
+                    case 3: StaticData.logoName.setText("MILAN"); break;
+                }
+                break;
+
+            case 2:
+                StaticData.first = R.drawable.x21;
+                StaticData.second = R.drawable.x22;
+                StaticData.third = R.drawable.x23;
+
+                switch (StaticData.randLogo){
+                    case 1: StaticData.logoName.setText("CSKA"); break;
+                    case 2: StaticData.logoName.setText("REAL MADRID"); break;
+                    case 3: StaticData.logoName.setText("PANATHINAIKOS"); break;
+                }
+                break;
+
+            case 3:
+                StaticData.first = R.drawable.x31;
+                StaticData.second = R.drawable.x32;
+                StaticData.third = R.drawable.x33;
+
+                switch (StaticData.randLogo){
+                    case 1: StaticData.logoName.setText("AUDI"); break;
+                    case 2: StaticData.logoName.setText("VOLKSWAGEN"); break;
+                    case 3: StaticData.logoName.setText("CHEVROLET"); break;
+                }
+                break;
+
+            case 4:
+                StaticData.first = R.drawable.x41;
+                StaticData.second = R.drawable.x42;
+                StaticData.third = R.drawable.x43;
+
+                switch (StaticData.randLogo){
+                    case 1: StaticData.logoName.setText("SAAB"); break;
+                    case 2: StaticData.logoName.setText("MERCEDES"); break;
+                    case 3: StaticData.logoName.setText("VOLVO"); break;
+                }
+                break;
+
+            case 5:
+                StaticData.first = R.drawable.x51;
+                StaticData.second = R.drawable.x52;
+                StaticData.third = R.drawable.x53;
+
+                switch (StaticData.randLogo){
+                    case 1: StaticData.logoName.setText("TWITTER"); break;
+                    case 2: StaticData.logoName.setText("GMAIL"); break;
+                    case 3: StaticData.logoName.setText("TUMBLR"); break;
+                }
+                break;
+
+            case 6:
+                StaticData.first = R.drawable.x61;
+                StaticData.second = R.drawable.x62;
+                StaticData.third = R.drawable.x63;
+
+                switch (StaticData.randLogo){
+                    case 1: StaticData.logoName.setText("YOUTUBE"); break;
+                    case 2: StaticData.logoName.setText("INSTAGRAM"); break;
+                    case 3: StaticData.logoName.setText("SNAPCHAT"); break;
+                }
+                break;
+
+            case 7:
+                StaticData.first = R.drawable.x71;
+                StaticData.second = R.drawable.x72;
+                StaticData.third = R.drawable.x73;
+
+                switch (StaticData.randLogo){
+                    case 1: StaticData.logoName.setText("DUCATI"); break;
+                    case 2: StaticData.logoName.setText("YAMAHA"); break;
+                    case 3: StaticData.logoName.setText("SUZUKI"); break;
+                }
+                break;
+
+            case 8:
+                StaticData.first = R.drawable.x81;
+                StaticData.second = R.drawable.x82;
+                StaticData.third = R.drawable.x83;
+
+                switch (StaticData.randLogo){
+                    case 1: StaticData.logoName.setText("ANDROID STUDIO"); break;
+                    case 2: StaticData.logoName.setText("ECLIPSE"); break;
+                    case 3: StaticData.logoName.setText("NET BEANS"); break;
+                }
+                break;
+
+            case 9:
+                StaticData.first = R.drawable.x91;
+                StaticData.second = R.drawable.x92;
+                StaticData.third = R.drawable.x93;
+
+                switch (StaticData.randLogo){
+                    case 1: StaticData.logoName.setText("TREK"); break;
+                    case 2: StaticData.logoName.setText("SCOTT"); break;
+                    case 3: StaticData.logoName.setText("KONA"); break;
+                }
+                break;
+        }
     }
 
     //SPREMENI VELIKOST GUMBA OB PREMIKU
