@@ -11,6 +11,7 @@
 
     <ImageButton
         android:id="@+id/firstCup"
+        android:tag="firstCup"
         android:layout_width="152dp"
         android:layout_height="190dp"
         android:scaleType="fitCenter"
@@ -22,6 +23,7 @@
 
     <ImageButton
         android:id="@+id/secondCup"
+        android:tag="secondCup"
         android:layout_width="152dp"
         android:layout_height="190dp"
         android:layout_marginTop="200dp"
@@ -33,6 +35,7 @@
 
     <ImageButton
         android:id="@+id/thirdCup"
+        android:tag="thirdCup"
         android:layout_width="152dp"
         android:layout_height="190dp"
         android:scaleType="fitCenter"

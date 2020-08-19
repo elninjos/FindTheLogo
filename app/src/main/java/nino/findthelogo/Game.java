@@ -158,26 +158,31 @@ public class Game extends AppCompatActivity {
     public void onClickCup(View view){
         StaticData.logoName.setVisibility(View.INVISIBLE);
         TransitionManager.beginDelayedTransition(StaticData.layoutGame);
+        String cupName = view.getTag().toString();
 
-        if(!StaticData.cupIsUp) {
-            changePositionOfCup(StaticData.firstCup);
-            changeSizeOfCup(StaticData.firstCup);
-            StaticData.logo1.setVisibility(View.VISIBLE);
-            StaticData.firstCupClicked = true;
-        }
+        if(!StaticData.cupIsUp){
+            switch (cupName){
+                case "firstCup":
+                    changePositionOfCup(StaticData.firstCup);
+                    changeSizeOfCup(StaticData.firstCup);
+                    StaticData.logo1.setVisibility(View.VISIBLE);
+                    StaticData.firstCupClicked = true;
+                    break;
 
-        if(!StaticData.cupIsUp) {
-            changePositionOfCup(StaticData.secondCup);
-            changeSizeOfCup(StaticData.secondCup);
-            StaticData.logo2.setVisibility(View.VISIBLE);
-            StaticData.secondCupClicked = true;
-        }
+                case "secondCup":
+                    changePositionOfCup(StaticData.secondCup);
+                    changeSizeOfCup(StaticData.secondCup);
+                    StaticData.logo2.setVisibility(View.VISIBLE);
+                    StaticData.secondCupClicked = true;
+                    break;
 
-        if(!StaticData.cupIsUp) {
-            changePositionOfCup(StaticData.thirdCup);
-            changeSizeOfCup(StaticData.thirdCup);
-            StaticData.logo3.setVisibility(View.VISIBLE);
-            StaticData.thirdCupClicked = true;
+                case "thirdCup":
+                    changePositionOfCup(StaticData.thirdCup);
+                    changeSizeOfCup(StaticData.thirdCup);
+                    StaticData.logo3.setVisibility(View.VISIBLE);
+                    StaticData.thirdCupClicked = true;
+                    break;
+            }
         }
 
         checkLogo();
@@ -398,53 +403,49 @@ public class Game extends AppCompatActivity {
 
     public void checkLogo() {
         if (StaticData.cupIsUp) {
-            if (StaticData.randLogo == 1) {
-                new Handler().postDelayed(new Runnable() {
-                    public void run() {
-                        if (StaticData.firstCupClicked) {
-                            changePositionOfCupToFirstPosition(StaticData.firstCup);
-                            changeSizeOfCup(StaticData.firstCup);
-                            StaticData.logo1.setVisibility(View.INVISIBLE);
-                            newRound();
-                        }
-                        else if(!StaticData.firstCupClicked) {
-                            gameOver();
-                        }
-                    }
-                }, 3000);
-            }
+            new Handler().postDelayed(new Runnable() {
+                public void run() {
+                    switch (StaticData.randLogo){
+                        case 1:
+                            if (StaticData.firstCupClicked) {
+                                changePositionOfCupToFirstPosition(StaticData.firstCup);
+                                changeSizeOfCup(StaticData.firstCup);
+                                StaticData.logo1.setVisibility(View.INVISIBLE);
+                                newRound();
+                            }
+                            else if(!StaticData.firstCupClicked) {
+                                gameOver();
+                            }
 
-            if (StaticData.randLogo == 2) {
-                new Handler().postDelayed(new Runnable() {
-                    public void run() {
-                        if (StaticData.secondCupClicked) {
-                            changePositionOfCupToFirstPosition(StaticData.secondCup);
-                            changeSizeOfCup(StaticData.secondCup);
-                            StaticData.logo2.setVisibility(View.INVISIBLE);
-                            newRound();
-                        }
-                        else if (!StaticData.secondCupClicked) {
-                            gameOver();
-                        }
-                    }
-                }, 3000);
-            }
+                            break;
 
-            if (StaticData.randLogo == 3) {
-                new Handler().postDelayed(new Runnable() {
-                    public void run() {
-                        if (StaticData.thirdCupClicked) {
-                            changePositionOfCupToFirstPosition(StaticData.thirdCup);
-                            changeSizeOfCup(StaticData.thirdCup);
-                            StaticData.logo3.setVisibility(View.INVISIBLE);
-                            newRound();
-                        }
-                        else if(!StaticData.thirdCupClicked) {
-                            gameOver();
-                        }
+                        case 2:
+                            if (StaticData.secondCupClicked) {
+                                changePositionOfCupToFirstPosition(StaticData.secondCup);
+                                changeSizeOfCup(StaticData.secondCup);
+                                StaticData.logo2.setVisibility(View.INVISIBLE);
+                                newRound();
+                            }
+                            else if (!StaticData.secondCupClicked) {
+                                gameOver();
+                            }
+                            break;
+
+                        case 3:
+                            if (StaticData.thirdCupClicked) {
+                                changePositionOfCupToFirstPosition(StaticData.thirdCup);
+                                changeSizeOfCup(StaticData.thirdCup);
+                                StaticData.logo3.setVisibility(View.INVISIBLE);
+                                newRound();
+                            }
+                            else if(!StaticData.thirdCupClicked) {
+                                gameOver();
+                            }
+                            break;
                     }
-                }, 3000);
-            }
+                }
+            }, 3000);
+
             StaticData.cupIsUp = false;
         }
     }
