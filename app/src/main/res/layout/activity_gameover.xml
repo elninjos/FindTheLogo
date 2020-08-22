@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="nino.UI.GameOver"
+    android:id="@+id/layoutGameOver"
+    android:clickable="false"
+    android:focusableInTouchMode="false"
+    android:nestedScrollingEnabled="false">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Play again?"
+        android:textSize="110sp"
+        android:textColor="#00A2E8"
+        android:id="@+id/gameOver"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:width="200dp"
+        android:height="67dp"
+        android:textSize="30sp"
+        android:text="Yes"
+        android:id="@+id/yes"
+        android:background="@drawable/mybutton"
+        android:layout_marginStart="31dp"
+        android:onClick="onClickYes"
+        android:layout_alignTop="@+id/no"
+        android:layout_alignStart="@+id/gameOver" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:width="200dp"
+        android:height="67dp"
+        android:textSize="30sp"
+        android:text="No"
+        android:id="@+id/no"
+        android:background="@drawable/mybutton"
+        android:layout_marginEnd="29dp"
+        android:onClick="onClickNo"
+        android:layout_below="@+id/gameOver"
+        android:layout_alignEnd="@+id/gameOver"
+        android:layout_marginTop="43dp" />
+</RelativeLayout>

@@ -1,4 +1,4 @@
-package nino.findthelogo;
+package nino.UI;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -14,6 +14,7 @@ public class StaticData {
 
     public static Intent gameWindow = null;
     public static Intent instructionsWindow = null;
+    public static Intent gameOverWindow = null;
 
     // endregion
 
@@ -37,19 +38,28 @@ public class StaticData {
     public static ImageButton logo1;
     public static ImageButton logo2;
     public static ImageButton logo3;
-    public static RelativeLayout popUp;
-    public static Button yes;
-    public static Button no;
-    public static TextView gameOver;
 
     public static boolean firstCupClicked = false;
     public static boolean secondCupClicked = false;
     public static boolean thirdCupClicked = false;
+    public static boolean correctLogo = false;
+    public static boolean gameFinished = false;
+
+    public static boolean[] results = new boolean[10];;
 
     public static int randLogo;
     public static int first;
     public static int second;
     public static int third;
+
+    // endregion
+
+    // region GAME OVER
+
+    public static RelativeLayout layoutGameOver;
+    public static Button yes;
+    public static Button no;
+    public static TextView gameOver;
 
     // endregion
 

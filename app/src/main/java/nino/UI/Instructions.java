@@ -1,4 +1,4 @@
-package nino.findthelogo;
+package nino.UI;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;

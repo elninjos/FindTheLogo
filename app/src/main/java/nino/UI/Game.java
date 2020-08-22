@@ -1,5 +1,6 @@
-package nino.findthelogo;
+package nino.UI;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -23,8 +24,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.Arrays;
 
 public class Game extends AppCompatActivity {
 
@@ -55,10 +55,42 @@ public class Game extends AppCompatActivity {
         StaticData.logo1 = (ImageButton) findViewById(R.id.logo1);
         StaticData.logo2 = (ImageButton) findViewById(R.id.logo2);
         StaticData.logo3 = (ImageButton) findViewById(R.id.logo3);
-        StaticData.popUp = (RelativeLayout) findViewById(R.id.popUp);
-        StaticData.gameOver = (TextView) findViewById(R.id.gameOver);
-        StaticData.yes = (Button) findViewById(R.id.yes);
-        StaticData.no = (Button) findViewById(R.id.no);
+    }
+
+    public void resetVars(){
+        StaticData.cupsUp = false; //Če so kozarci dvigneni so manjši, drugače so v isti dimenziji
+        StaticData.cupIsUp = false; //Če je en kozarček dvignen, druga dva nemoreš dvigniti
+
+        // Make cups visible, update position and size
+        StaticData.firstCup.setVisibility(View.VISIBLE);
+        StaticData.secondCup.setVisibility(View.VISIBLE);
+        StaticData.thirdCup.setVisibility(View.VISIBLE);
+        changeCupPositionFirst("firstCup");
+        changeCupPositionFirst("secondCup");
+        changeCupPositionFirst("thirdCup");
+        changeSizeOfCup(StaticData.firstCup);
+        changeSizeOfCup(StaticData.secondCup);
+        changeSizeOfCup(StaticData.thirdCup);
+
+        // Set logoName to invisible
+        StaticData.logoName.setVisibility(View.INVISIBLE);
+        StaticData.logoName.setText("");
+
+        // Make logos invisible
+        StaticData.logo1.setVisibility(View.INVISIBLE);
+        StaticData.logo2.setVisibility(View.INVISIBLE);
+        StaticData.logo3.setVisibility(View.INVISIBLE);
+
+        StaticData.firstCupClicked = false;
+        StaticData.secondCupClicked = false;
+        StaticData.thirdCupClicked = false;
+        StaticData.correctLogo = false;
+
+        // Reset results
+        if(StaticData.gameFinished){
+            Arrays.fill(StaticData.results, false);
+            StaticData.gameFinished = false;
+        }
     }
 
     private void draw(){
@@ -79,35 +111,21 @@ public class Game extends AppCompatActivity {
                 StaticData.thirdCup.setBackground(cup);
             }
         });
-
-        Glide.with(this).asBitmap().load(R.drawable.background).into(new SimpleTarget<Bitmap>(247, 350) {
-            @Override
-            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                Drawable background = new BitmapDrawable(resource);
-                StaticData.popUp.setBackground(background);
-            }
-        });
     }
 
     private void changeFont(){
         StaticData.start.setTypeface(StaticData.fontComicSans);
         StaticData.logoName.setTypeface(StaticData.fontComicSans);
-        StaticData.yes.setTypeface(StaticData.fontComicSans);
-        StaticData.no.setTypeface(StaticData.fontComicSans);
-        StaticData.gameOver.setTypeface(StaticData.fontOrangeJuice);
     }
 
-    public void onClickStart(View view){
+    public void newRound(){
         // Animation becomes better
         TransitionManager.beginDelayedTransition(StaticData.layoutGame);
 
         // Hide start button
         StaticData.start.setVisibility(View.GONE);
 
-        // Show cups
-        StaticData.firstCup.setVisibility(View.VISIBLE);
-        StaticData.secondCup.setVisibility(View.VISIBLE);
-        StaticData.thirdCup.setVisibility(View.VISIBLE);
+        resetVars();
 
         //Random for logotypes
         checkRandom();
@@ -116,9 +134,9 @@ public class Game extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             public void run() {
                 StaticData.cupsUp = true;
-                changePositionOfCup(StaticData.firstCup);
-                changePositionOfCup(StaticData.secondCup);
-                changePositionOfCup(StaticData.thirdCup);
+                changePositionOfCup("firstCup");
+                changePositionOfCup("secondCup");
+                changePositionOfCup("thirdCup");
                 changeSizeOfCup(StaticData.firstCup);
                 changeSizeOfCup(StaticData.secondCup);
                 changeSizeOfCup(StaticData.thirdCup);
@@ -135,9 +153,9 @@ public class Game extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             public void run() {
                 StaticData.cupsUp = false;
-                changePositionOfCupToFirstPosition(StaticData.firstCup);
-                changePositionOfCupToFirstPosition(StaticData.secondCup);
-                changePositionOfCupToFirstPosition(StaticData.thirdCup);
+                changeCupPositionFirst("firstCup");
+                changeCupPositionFirst("secondCup");
+                changeCupPositionFirst("thirdCup");
                 changeSizeOfCup(StaticData.firstCup);
                 changeSizeOfCup(StaticData.secondCup);
                 changeSizeOfCup(StaticData.thirdCup);
@@ -155,7 +173,7 @@ public class Game extends AppCompatActivity {
         }, 4000);
     }
 
-    public void onClickCup(View view){
+    public void onClickCup(View view) throws InterruptedException {
         StaticData.logoName.setVisibility(View.INVISIBLE);
         TransitionManager.beginDelayedTransition(StaticData.layoutGame);
         String cupName = view.getTag().toString();
@@ -163,99 +181,115 @@ public class Game extends AppCompatActivity {
         if(!StaticData.cupIsUp){
             switch (cupName){
                 case "firstCup":
-                    changePositionOfCup(StaticData.firstCup);
+                    changePositionOfCup("firstCup");
                     changeSizeOfCup(StaticData.firstCup);
                     StaticData.logo1.setVisibility(View.VISIBLE);
                     StaticData.firstCupClicked = true;
                     break;
 
                 case "secondCup":
-                    changePositionOfCup(StaticData.secondCup);
+                    changePositionOfCup("secondCup");
                     changeSizeOfCup(StaticData.secondCup);
                     StaticData.logo2.setVisibility(View.VISIBLE);
                     StaticData.secondCupClicked = true;
                     break;
 
                 case "thirdCup":
-                    changePositionOfCup(StaticData.thirdCup);
+                    changePositionOfCup("thirdCup");
                     changeSizeOfCup(StaticData.thirdCup);
                     StaticData.logo3.setVisibility(View.VISIBLE);
                     StaticData.thirdCupClicked = true;
                     break;
             }
+            StaticData.cupIsUp = true;
         }
 
         checkLogo();
+
+        if(StaticData.correctLogo){
+            resetVars();
+            // TODO: Ali se da kako drugače začet novo rundo, da se to mogoče ne cikla?!
+            newRound();
+        }
+        else {
+            StaticData.gameFinished = true;
+            resetVars();
+            gameOver();
+        }
     }
 
-    //SPREMENI POZICIJO GUMBA OB PREMIKU
-    public void changePositionOfCup(ImageButton imgBtn){
+    public void changePositionOfCup(String cupBtn){
         RelativeLayout.LayoutParams positionRules = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 
-        if(imgBtn.equals(StaticData.firstCup)){
-            positionRules.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
-            positionRules.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
-            positionRules.setMargins(convert(61), convert(40),0,0);
-            imgBtn.setLayoutParams(positionRules);
-        }
-        else if(imgBtn.equals(StaticData.secondCup)){
-            positionRules.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
-            positionRules.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
-            positionRules.setMargins(0, convert(40),0,0);
-            imgBtn.setLayoutParams(positionRules);
-        }
-        else if(imgBtn.equals(StaticData.thirdCup)){
-            positionRules.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
-            positionRules.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
-            positionRules.setMargins(0, convert(40), convert(61),0);
-            imgBtn.setLayoutParams(positionRules);
+        switch (cupBtn){
+            case "firstCup":
+                positionRules.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
+                positionRules.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
+                positionRules.setMargins(convert(61), convert(40),0,0);
+                StaticData.firstCup.setLayoutParams(positionRules);
+                break;
+
+            case "secondCup":
+                positionRules.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
+                positionRules.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
+                positionRules.setMargins(0, convert(40),0,0);
+                StaticData.secondCup.setLayoutParams(positionRules);
+                break;
+
+            case "thirdCup":
+                positionRules.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
+                positionRules.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
+                positionRules.setMargins(0, convert(40), convert(61),0);
+                StaticData.thirdCup.setLayoutParams(positionRules);
+                break;
         }
     }
 
-    //PRETVORBA IZ PX V DP
+    // Convert from PX to DP
     public static int convert(int px) {
         return (int) (px * Resources.getSystem().getDisplayMetrics().density);
     }
 
-    //SPREMENI POZICIJO GUMBA NA ZAČETNO POZICIJO
-    public void changePositionOfCupToFirstPosition(ImageButton imgBtn){
+    // Changes cup position to first (main) position
+    public void changeCupPositionFirst(String cupBtn){
         RelativeLayout.LayoutParams positionRules = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 
-        if(imgBtn.equals(StaticData.firstCup)) {
-            positionRules.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
-            positionRules.setMargins(convert(40), convert(200), 0, 0);
-            imgBtn.setLayoutParams(positionRules);
-        }
+        switch (cupBtn){
+            case "firstCup":
+                positionRules.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
+                positionRules.setMargins(convert(40), convert(200), 0, 0);
+                StaticData.firstCup.setLayoutParams(positionRules);
+                break;
 
-        else if(imgBtn.equals(StaticData.secondCup)) {
-            positionRules.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
-            positionRules.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
-            positionRules.setMargins(0, convert(200), 0, 0);
-            imgBtn.setLayoutParams(positionRules);
-        }
+            case "secondCup":
+                positionRules.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
+                positionRules.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
+                positionRules.setMargins(0, convert(200), 0, 0);
+                StaticData.secondCup.setLayoutParams(positionRules);
+                break;
 
-        else if(imgBtn.equals(StaticData.thirdCup)) {
-            positionRules.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
-            positionRules.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
-            positionRules.setMargins(0, convert(200), convert(40), 0);
-            imgBtn.setLayoutParams(positionRules);
+            case "thirdCup":
+                positionRules.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
+                positionRules.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
+                positionRules.setMargins(0, convert(200), convert(40), 0);
+                StaticData.thirdCup.setLayoutParams(positionRules);
+                break;
         }
     }
 
     public void checkRandom(){
-        boolean[] tab = new boolean[10];
         int rand = (int)(Math.random() * 10 + 0);
 
-        if(!tab[rand]){
-            tab[rand] = true;
+        if(!StaticData.results[rand]){
+            StaticData.results[rand] = true;
             setLogos(rand);
         }
-        else if(tab[rand]){
+        else if(StaticData.results[rand]){
             checkRandom();
         }
-        else if(tab[0] && tab[1] && tab[2] && tab[3] && tab[4] && tab[5] && tab[6] && tab[7] && tab[8] && tab[9]) {
+        else if(StaticData.results[0] && StaticData.results[1] && StaticData.results[2] && StaticData.results[3] && StaticData.results[4] && StaticData.results[5] && StaticData.results[6] && StaticData.results[7] && StaticData.results[8] && StaticData.results[9]) {
             gameOver();
         }
     }
@@ -386,14 +420,15 @@ public class Game extends AppCompatActivity {
         }
     }
 
-    //SPREMENI VELIKOST GUMBA OB PREMIKU
+    // Changes size of cup at the movement
     public void changeSizeOfCup(ImageButton imgBtn){
         ViewGroup.LayoutParams sizeRules = imgBtn.getLayoutParams();
-        if(StaticData.cupIsUp||StaticData.cupIsUp) {
+
+        if(StaticData.cupIsUp || StaticData.cupsUp) {
             sizeRules.width = convert(112);
             sizeRules.height = convert(136);
         }
-        else if(!StaticData.cupsUp&&!StaticData.cupIsUp){
+        else {
             sizeRules.width = convert(152);
             sizeRules.height = convert(190);
         }
@@ -402,73 +437,53 @@ public class Game extends AppCompatActivity {
     }
 
     public void checkLogo() {
-        if (StaticData.cupIsUp) {
-            new Handler().postDelayed(new Runnable() {
-                public void run() {
-                    switch (StaticData.randLogo){
+        // TODO: Problem je v tem ker je asinhrono, šele po 3 sekundah gre v run metodo
+        new Handler().postDelayed(new Runnable() {
+            public void run() {
+                if (StaticData.cupIsUp) {
+                    switch (StaticData.randLogo) {
                         case 1:
                             if (StaticData.firstCupClicked) {
-                                changePositionOfCupToFirstPosition(StaticData.firstCup);
+                                changeCupPositionFirst("firstCup");
                                 changeSizeOfCup(StaticData.firstCup);
                                 StaticData.logo1.setVisibility(View.INVISIBLE);
-                                newRound();
+                                StaticData.correctLogo = true;
                             }
-                            else if(!StaticData.firstCupClicked) {
-                                gameOver();
-                            }
-
                             break;
 
                         case 2:
                             if (StaticData.secondCupClicked) {
-                                changePositionOfCupToFirstPosition(StaticData.secondCup);
+                                changeCupPositionFirst("secondCup");
                                 changeSizeOfCup(StaticData.secondCup);
                                 StaticData.logo2.setVisibility(View.INVISIBLE);
-                                newRound();
-                            }
-                            else if (!StaticData.secondCupClicked) {
-                                gameOver();
+                                StaticData.correctLogo = true;
                             }
                             break;
 
                         case 3:
                             if (StaticData.thirdCupClicked) {
-                                changePositionOfCupToFirstPosition(StaticData.thirdCup);
+                                changeCupPositionFirst("thirdCup");
                                 changeSizeOfCup(StaticData.thirdCup);
                                 StaticData.logo3.setVisibility(View.INVISIBLE);
-                                newRound();
-                            }
-                            else if(!StaticData.thirdCupClicked) {
-                                gameOver();
+                                StaticData.correctLogo = true;
                             }
                             break;
                     }
                 }
-            }, 3000);
-
-            StaticData.cupIsUp = false;
-        }
-    }
-
-    public void newRound(){
-        onClickStart(new View(null));
+            }
+        }, 3000);
     }
 
     public void gameOver(){
-        StaticData.firstCup.setVisibility(View.INVISIBLE);
-        StaticData.secondCup.setVisibility(View.INVISIBLE);
-        StaticData.thirdCup.setVisibility(View.INVISIBLE);
-        StaticData.logo1.setVisibility(View.INVISIBLE);
-        StaticData.logo2.setVisibility(View.INVISIBLE);
-        StaticData.logo3.setVisibility(View.INVISIBLE);
-        StaticData.popUp.setVisibility(View.VISIBLE);
+        StaticData.gameOverWindow = new Intent(this, GameOver.class);
+        startActivity(StaticData.gameOverWindow);
     }
 
-    public void onClickYes (View view){
-        finish();
+    // region BUTTONS
+
+    public void onClickStart (View view){
+        newRound();
     }
 
-    public void onClickNo (View view){
-        finish();
-    }
+    // endregion
 }
