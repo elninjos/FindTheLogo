@@ -35,7 +35,6 @@ public class Instructions extends AppCompatActivity {
         setContentView(R.layout.activity_instructions);
 
         background();
-        setTitle();
         instructions();
     }
 
@@ -49,11 +48,6 @@ public class Instructions extends AppCompatActivity {
                 StaticData.layoutInstructions.setBackground(layout_draw);
             }
         });
-    }
-
-    private void setTitle(){
-        StaticData.title = findViewById(R.id.title);
-        StaticData.title.setTypeface(StaticData.fontOrangeJuice);
     }
 
     private void instructions(){
@@ -74,6 +68,5 @@ public class Instructions extends AppCompatActivity {
         }
 
         StaticData.instructions.setText(text);
-        StaticData.instructions.setTypeface(StaticData.fontComicSans);
     }
 }

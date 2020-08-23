@@ -44,7 +44,6 @@ public class Title extends AppCompatActivity {
 
         init();
         draw();
-        font();
     }
 
     private void init(){
@@ -70,14 +69,6 @@ public class Title extends AppCompatActivity {
                 layout.setBackground(layout_draw);
             }
         });
-    }
-
-    private void font(){
-        StaticData.fontComicSans = Typeface.createFromAsset(getAssets(), "fonts/ComicSans.ttf");
-        playButton.setTypeface(StaticData.fontComicSans);
-
-        StaticData.fontOrangeJuice = Typeface.createFromAsset(getAssets(), "fonts/orange_juice.ttf");
-        title.setTypeface(StaticData.fontOrangeJuice);
     }
 
     public void onClickPlay(View view){

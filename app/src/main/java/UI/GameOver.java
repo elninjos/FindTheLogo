@@ -36,7 +36,6 @@ public class GameOver extends AppCompatActivity {
 
         init();
         draw();
-        changeFont();
         gameOver();
     }
 
@@ -55,12 +54,6 @@ public class GameOver extends AppCompatActivity {
                 StaticData.layoutGameOver.setBackground(background);
             }
         });
-    }
-
-    private void changeFont(){
-        StaticData.yes.setTypeface(StaticData.fontComicSans);
-        StaticData.no.setTypeface(StaticData.fontComicSans);
-        StaticData.gameOver.setTypeface(StaticData.fontOrangeJuice);
     }
 
     public void gameOver(){

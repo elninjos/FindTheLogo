@@ -45,7 +45,6 @@ public class Game extends AppCompatActivity {
 
         init();
         draw();
-        changeFont();
     }
 
     public void init(){
@@ -114,11 +113,6 @@ public class Game extends AppCompatActivity {
                 StaticData.thirdCup.setBackground(cup);
             }
         });
-    }
-
-    private void changeFont(){
-        StaticData.start.setTypeface(StaticData.fontComicSans);
-        StaticData.logoName.setTypeface(StaticData.fontComicSans);
     }
 
     public void newRound(){

@@ -65,11 +65,4 @@ public class StaticData {
     public static TextView gameOver;
 
     // endregion
-
-    // region FONTS
-
-    public static Typeface fontOrangeJuice;
-    public static Typeface fontComicSans;
-
-    // endregion
 }
