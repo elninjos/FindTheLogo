@@ -1,4 +1,4 @@
-package nino.UI;
+package UI;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
@@ -19,9 +18,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Instructions extends AppCompatActivity {
+import Logic.StaticData;
+import nino.UI.R;
 
-    RelativeLayout layout;
+public class Instructions extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,13 +40,13 @@ public class Instructions extends AppCompatActivity {
     }
 
     private void background(){
-        layout = findViewById(R.id.layout);
+        StaticData.layoutInstructions = findViewById(R.id.layoutInstructions);
 
         Glide.with(this).asBitmap().load(R.drawable.background).into(new SimpleTarget<Bitmap>(500, 500) {
             @Override
             public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                 Drawable layout_draw = new BitmapDrawable(resource);
-                layout.setBackground(layout_draw);
+                StaticData.layoutInstructions.setBackground(layout_draw);
             }
         });
     }

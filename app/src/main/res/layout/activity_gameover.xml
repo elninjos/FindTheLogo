@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="nino.UI.GameOver"
+    tools:context="UI.GameOver"
     android:id="@+id/layoutGameOver"
     android:clickable="false"
     android:focusableInTouchMode="false"

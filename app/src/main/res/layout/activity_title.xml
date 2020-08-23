@@ -4,7 +4,7 @@
     android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="nino.UI.Title">
+    tools:context="UI.Title">
 
     <Button
         android:id="@+id/playButton"

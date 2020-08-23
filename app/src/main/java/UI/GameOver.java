@@ -1,4 +1,4 @@
-package nino.UI;
+package UI;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -17,6 +17,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
+
+import Logic.StaticData;
+import nino.UI.R;
 
 public class GameOver extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package nino.UI;
+package UI;
 
 import android.content.Intent;
 import android.content.res.Resources;
@@ -25,6 +25,9 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 
 import java.util.Arrays;
+
+import Logic.StaticData;
+import nino.UI.R;
 
 public class Game extends AppCompatActivity {
 
@@ -128,7 +131,7 @@ public class Game extends AppCompatActivity {
         resetVars();
 
         //Random for logotypes
-        checkRandom();
+        StaticData.bf.checkRandom();
 
         //Po 1 sekundi loncke dvigne
         new Handler().postDelayed(new Runnable() {
@@ -226,21 +229,21 @@ public class Game extends AppCompatActivity {
             case "firstCup":
                 positionRules.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
                 positionRules.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
-                positionRules.setMargins(convert(61), convert(40),0,0);
+                positionRules.setMargins(StaticData.bf.convert(61), StaticData.bf.convert(40),0,0);
                 StaticData.firstCup.setLayoutParams(positionRules);
                 break;
 
             case "secondCup":
                 positionRules.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
                 positionRules.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
-                positionRules.setMargins(0, convert(40),0,0);
+                positionRules.setMargins(0, StaticData.bf.convert(40),0,0);
                 StaticData.secondCup.setLayoutParams(positionRules);
                 break;
 
             case "thirdCup":
                 positionRules.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
                 positionRules.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
-                positionRules.setMargins(0, convert(40), convert(61),0);
+                positionRules.setMargins(0, StaticData.bf.convert(40), StaticData.bf.convert(61),0);
                 StaticData.thirdCup.setLayoutParams(positionRules);
                 break;
         }
@@ -259,21 +262,21 @@ public class Game extends AppCompatActivity {
         switch (cupBtn){
             case "firstCup":
                 positionRules.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
-                positionRules.setMargins(convert(40), convert(200), 0, 0);
+                positionRules.setMargins(StaticData.bf.convert(40), StaticData.bf.convert(200), 0, 0);
                 StaticData.firstCup.setLayoutParams(positionRules);
                 break;
 
             case "secondCup":
                 positionRules.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
                 positionRules.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
-                positionRules.setMargins(0, convert(200), 0, 0);
+                positionRules.setMargins(0, StaticData.bf.convert(200), 0, 0);
                 StaticData.secondCup.setLayoutParams(positionRules);
                 break;
 
             case "thirdCup":
                 positionRules.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
                 positionRules.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
-                positionRules.setMargins(0, convert(200), convert(40), 0);
+                positionRules.setMargins(0, StaticData.bf.convert(200), StaticData.bf.convert(40), 0);
                 StaticData.thirdCup.setLayoutParams(positionRules);
                 break;
         }
@@ -284,7 +287,7 @@ public class Game extends AppCompatActivity {
 
         if(!StaticData.results[rand]){
             StaticData.results[rand] = true;
-            setLogos(rand);
+            StaticData.bf.setLogos(rand);
         }
         else if(StaticData.results[rand]){
             checkRandom();
@@ -425,12 +428,12 @@ public class Game extends AppCompatActivity {
         ViewGroup.LayoutParams sizeRules = imgBtn.getLayoutParams();
 
         if(StaticData.cupIsUp || StaticData.cupsUp) {
-            sizeRules.width = convert(112);
-            sizeRules.height = convert(136);
+            sizeRules.width = StaticData.bf.convert(112);
+            sizeRules.height = StaticData.bf.convert(136);
         }
         else {
-            sizeRules.width = convert(152);
-            sizeRules.height = convert(190);
+            sizeRules.width = StaticData.bf.convert(152);
+            sizeRules.height = StaticData.bf.convert(190);
         }
 
         imgBtn.setLayoutParams(sizeRules);

@@ -1,4 +1,4 @@
-package nino.UI;
+package Logic;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -20,6 +20,7 @@ public class StaticData {
 
     // region INSTRUCTIONS
 
+    public static RelativeLayout layoutInstructions = null;
     public static TextView instructions = null;
     public static TextView title = null;
 
@@ -51,6 +52,8 @@ public class StaticData {
     public static int first;
     public static int second;
     public static int third;
+
+    public static BackgroundFunctions bf = new BackgroundFunctions();
 
     // endregion
 

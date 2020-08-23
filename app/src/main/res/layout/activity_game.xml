@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="nino.UI.Game"
+    tools:context="UI.Game"
     android:id="@+id/layoutGame"
     android:clickable="false"
     android:focusableInTouchMode="false"
