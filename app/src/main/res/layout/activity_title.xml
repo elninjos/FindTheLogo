@@ -4,7 +4,7 @@
     android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="UI.Title">
+    tools:context="ui.Title">
 
     <TextView
         android:id="@+id/title"
@@ -13,7 +13,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/findthelogo"
         android:fontFamily="@font/orange_juice"
-        android:textSize="100sp"
+        android:textSize="110sp"
         android:layout_marginTop="20dp"
         android:textColor="#00A2E8"
         android:layout_centerHorizontal="true"/>
