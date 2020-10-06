@@ -12,6 +12,9 @@ public class StaticData {
 
     // region TITLE
 
+    public static RelativeLayout layoutTitle = null;
+    public static ImageButton infoBtn = null;
+    public static Button playBtn = null;
     public static Intent gameWindow = null;
     public static Intent instructionsWindow = null;
     public static Intent gameOverWindow = null;
@@ -46,7 +49,7 @@ public class StaticData {
     public static boolean correctLogo = false;
     public static boolean gameFinished = false;
 
-    public static boolean[] results = new boolean[10];;
+    public static boolean[] results = new boolean[10];
 
     public static int randLogo;
     public static int first;

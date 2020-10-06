@@ -4,7 +4,8 @@
     android:id="@+id/layoutInstructions"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ui.Instructions">
+    tools:context="UI.Instructions"
+    tools:ignore="MissingDefaultResource">
 
     <TextView
         android:id="@+id/title"
