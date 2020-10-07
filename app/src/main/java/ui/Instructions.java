@@ -26,17 +26,11 @@ public class Instructions extends AppCompatActivity {
         setContentView(R.layout.activity_instructions);
 
         init();
-        draw();
         writeInstructions();
     }
 
     private void init(){
-        StaticData.layoutInstructions = findViewById(R.id.layoutInstructions);
         StaticData.instructions = findViewById(R.id.instructions);
-    }
-
-    private void draw(){
-        StaticData.layoutInstructions.setBackgroundResource(R.drawable.background);
     }
 
     private void writeInstructions(){

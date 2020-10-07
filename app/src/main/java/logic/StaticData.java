@@ -23,9 +23,7 @@ public class StaticData {
 
     // region INSTRUCTIONS
 
-    public static RelativeLayout layoutInstructions = null;
     public static TextView instructions = null;
-    public static TextView title = null;
 
     // endregion
 

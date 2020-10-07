@@ -36,7 +36,7 @@ public class Game extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
-        //FULLSCREEN
+        // FULLSCREEN
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);

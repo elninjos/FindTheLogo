@@ -40,10 +40,10 @@ public class GameOver extends AppCompatActivity {
     }
 
     private void init(){
-        StaticData.layoutGameOver = (RelativeLayout) findViewById(R.id.layoutGameOver);
-        StaticData.gameOver = (TextView) findViewById(R.id.gameOver);
-        StaticData.yes = (Button) findViewById(R.id.yes);
-        StaticData.no = (Button) findViewById(R.id.no);
+        StaticData.layoutGameOver = findViewById(R.id.layoutGameOver);
+        StaticData.gameOver = findViewById(R.id.gameOver);
+        StaticData.yes = findViewById(R.id.yes);
+        StaticData.no = findViewById(R.id.no);
     }
 
     private void draw(){

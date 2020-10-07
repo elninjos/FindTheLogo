@@ -22,20 +22,6 @@ public class Title extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_title);
-
-        init();
-        draw();
-    }
-
-    private void init(){
-        StaticData.infoBtn = findViewById(R.id.infoButton);
-        StaticData.playBtn = findViewById(R.id.playButton);
-        StaticData.layoutTitle = findViewById(R.id.layoutTitle);
-    }
-
-    private void draw(){
-        StaticData.infoBtn.setBackgroundResource(R.drawable.info);
-        StaticData.layoutTitle.setBackgroundResource(R.drawable.background);
     }
 
     public void onClickPlay(View view){

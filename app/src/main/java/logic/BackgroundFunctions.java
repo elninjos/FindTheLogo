@@ -7,9 +7,6 @@ import java.util.EventListener;
 import nino.UI.R;
 
 public class BackgroundFunctions {
-    private void setFonts(){
-
-    }
 
     public void checkRandom(){
         int rand = (int)(Math.random() * 10 + 0);
