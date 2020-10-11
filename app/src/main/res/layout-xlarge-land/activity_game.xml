@@ -29,8 +29,8 @@
 
     <ImageButton
         android:id="@+id/secondCup"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:contentDescription="@string/on_click_second_cup"
         android:onClick="onClickCup"
@@ -80,8 +80,8 @@
 
     <ImageButton
         android:id="@+id/logo1"
-        android:layout_width="152dp"
-        android:layout_height="152dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:contentDescription="@string/logotype1"
         android:scaleType="fitCenter"
         android:visibility="invisible"
@@ -93,8 +93,8 @@
 
     <ImageButton
         android:id="@+id/logo2"
-        android:layout_width="152dp"
-        android:layout_height="152dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:contentDescription="@string/logotype2"
         android:scaleType="fitCenter"
@@ -107,8 +107,8 @@
 
     <ImageButton
         android:id="@+id/logo3"
-        android:layout_width="152dp"
-        android:layout_height="152dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:contentDescription="@string/logotype3"
         android:scaleType="fitCenter"
@@ -121,7 +121,8 @@
 
     <TextView
         android:id="@+id/logoName"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:textAlignment="center"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"

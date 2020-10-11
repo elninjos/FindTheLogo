@@ -5,4 +5,12 @@
     <string name="instructions">INSTRUCTIONS</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="on_click_first_cup">On click first cup</string>
+    <string name="on_click_second_cup">On click second cup</string>
+    <string name="on_click_third_cup">On click third cup</string>
+    <string name="touch_the_screen_to_start">Touch the screen to start!</string>
+    <string name="logotype1">Logotype1</string>
+    <string name="logotype2">Logotype2</string>
+    <string name="logotype3">Logotype3</string>
+    <string name="play_again">Play again?</string>
 </resources>
