@@ -9,8 +9,10 @@ import nino.UI.R;
 public class BackgroundFunctions {
 
     public void checkRandom(){
+        // TODO: random brez ponavljanja
         int rand = (int)(Math.random() * 10 + 0);
 
+        // TODO: Poglej za najboljšo podatkovno strukturo, katera ima najhitrejši search and delete
         if(!StaticData.results[rand]){
             StaticData.results[rand] = true;
             setLogos(rand);

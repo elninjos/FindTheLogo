@@ -33,9 +33,9 @@ public class GameOver extends AppCompatActivity {
     }
 
     public void gameOver(){
-        StaticData.firstCup.setVisibility(View.INVISIBLE);
-        StaticData.secondCup.setVisibility(View.INVISIBLE);
-        StaticData.thirdCup.setVisibility(View.INVISIBLE);
+        StaticData.firstCupBtn.setVisibility(View.INVISIBLE);
+        StaticData.secondCupBtn.setVisibility(View.INVISIBLE);
+        StaticData.thirdCupBtn.setVisibility(View.INVISIBLE);
         StaticData.logo1.setVisibility(View.INVISIBLE);
         StaticData.logo2.setVisibility(View.INVISIBLE);
         StaticData.logo3.setVisibility(View.INVISIBLE);
