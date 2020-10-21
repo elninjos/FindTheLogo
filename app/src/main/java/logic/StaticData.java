@@ -11,6 +11,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.LinkedHashSet;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+
 public class StaticData {
     // CLASSES
 
@@ -36,8 +40,6 @@ public class StaticData {
     public static ImageButton thirdCupBtn;
     public static Button startBtn;
     public static TextView logoName;
-    public static boolean cupsUp = false; // Če so kozarci dvigneni so manjši, drugače so v isti dimenziji
-    public static boolean cupIsUp = false; // Če je en kozarček dvignen, druga dva nemoreš dvigniti
     public static ImageView logo1;
     public static ImageView logo2;
     public static ImageView logo3;
@@ -48,15 +50,12 @@ public class StaticData {
     public static boolean correctLogo = false;
     public static boolean gameFinished = false;
 
-    public static boolean[] results = new boolean[10];
-
+    public static LinkedHashSet<Integer> logosSeq;
     public static int randLogo;
-    public static int first;
-    public static int second;
-    public static int third;
 
     public static ConstraintSet startGameCS;
     public static ConstraintSet hideStartBtnCS;
+    public static ConstraintSet showCupsCS;
     public static ConstraintSet cupsUpCS;
     public static ConstraintSet cupsDownCS;
     public static ConstraintSet raiseCupCS;

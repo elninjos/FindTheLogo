@@ -1,19 +1,252 @@
 <?xml version="1.0" encoding="utf-8"?>
-<MotionScene 
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:motion="http://schemas.android.com/apk/res-auto">
 
-    <Transition
-        motion:constraintSetEnd="@+id/end"
-        motion:constraintSetStart="@id/start"
-        motion:duration="1000">
-       <KeyFrameSet>
-       </KeyFrameSet>
-    </Transition>
+    <ConstraintSet android:id="@+id/startGame" >
+        <Constraint
+            android:id="@+id/startBtn"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:visibility="visible" />
+    </ConstraintSet>
 
-    <ConstraintSet android:id="@+id/start">
+    <Transition
+        android:id="@+id/hideStartTransition"
+        motion:constraintSetStart="@id/startGame"
+        motion:constraintSetEnd="@+id/hideStartButton"
+        motion:duration="5000" /> <!-- 1500 -->
+
+    <ConstraintSet
+        android:id="@+id/hideStartButton"
+        motion:deriveConstraintsFrom="@+id/startGame" >
+        <Constraint
+            android:id="@+id/startBtn"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="invisible"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+    </ConstraintSet>
+
+    <Transition
+        android:id="@+id/showCupsTransition"
+        motion:constraintSetStart="@id/hideStartButton"
+        motion:constraintSetEnd="@+id/showCups"
+        motion:duration="5000" /> <!-- 1000 -->
+
+    <ConstraintSet android:id="@+id/showCups">
+        <Constraint
+            android:id="@+id/firstCupBtn"
+            motion:layout_constraintEnd_toStartOf="@+id/secondCupBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="visible"
+            motion:layout_constraintVertical_bias="0.8"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/secondCupBtn"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="visible"
+            motion:layout_constraintVertical_bias="0.8"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/thirdCupBtn"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toEndOf="@+id/secondCupBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="visible"
+            motion:layout_constraintVertical_bias="0.8"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/startBtn"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:visibility="invisible" />
+    </ConstraintSet>
+
+    <Transition
+        android:id="@+id/raiseCupsTransition"
+        motion:constraintSetStart="@id/showCups"
+        motion:constraintSetEnd="@+id/cupsUp"
+        motion:duration="5000" /> <!-- 500 -->
+
+    <ConstraintSet android:id="@+id/cupsUp" >
+        <Constraint
+            android:id="@+id/firstCupBtn"
+            motion:layout_constraintEnd_toStartOf="@+id/secondCupBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="visible"
+            motion:layout_constraintVertical_bias="0.35"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/secondCupBtn"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="visible"
+            motion:layout_constraintVertical_bias="0.35"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/thirdCupBtn"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toEndOf="@+id/secondCupBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="visible"
+            motion:layout_constraintVertical_bias="0.35"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/logo1"
+            motion:layout_constraintEnd_toStartOf="@+id/logo2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="visible"
+            motion:layout_constraintVertical_bias="0.75"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            android:layout_marginBottom="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginStart="0dp" />
+        <Constraint
+            android:id="@+id/logo2"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="visible"
+            motion:layout_constraintVertical_bias="0.75"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/logo3"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toEndOf="@+id/logo2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="visible"
+            motion:layout_constraintVertical_bias="0.75"
+            motion:layout_constraintTop_toTopOf="parent"
+            android:layout_marginRight="0dp"
+            android:layout_marginEnd="0dp" />
+        <Constraint
+            android:id="@+id/logoName"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="invisible"
+            motion:layout_constraintVertical_bias="0.0"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintHorizontal_bias="0.5"
+            motion:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/startBtn"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:visibility="gone" />
+    </ConstraintSet>
+
+    <Transition
+        android:id="@+id/releaseCupsTransition"
+        motion:constraintSetStart="@id/cupsUp"
+        motion:constraintSetEnd="@+id/cupsDown"
+        motion:duration="5000" />
+
+    <ConstraintSet
+        android:id="@+id/cupsDown"
+        motion:deriveConstraintsFrom="@+id/showCups" >
+        <Constraint
+            android:id="@+id/logoName"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="visible"
+            motion:layout_constraintHorizontal_bias="0.5"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="@+id/logo2"
+            motion:layout_constraintVertical_bias="0.05" />
+        <Constraint
+            android:id="@+id/startBtn"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:visibility="gone" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/startBtn"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:visibility="gone" />
+        <Constraint
+            android:id="@+id/logo1"
+            motion:layout_constraintEnd_toStartOf="@+id/logo2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="invisible"
+            motion:layout_constraintVertical_bias="0.75"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/logo3"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toEndOf="@+id/logo2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="invisible"
+            motion:layout_constraintVertical_bias="0.75"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/logo2"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="140dp"
+            android:layout_height="match_parent"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="invisible"
+            motion:layout_constraintVertical_bias="0.75"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
     </ConstraintSet>
+
 </MotionScene>
