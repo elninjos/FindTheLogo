@@ -60,8 +60,6 @@ public class StaticData {
     public static ConstraintSet cupsDownCS;
     public static ConstraintSet raiseCupCS;
 
-    public static BackgroundFunctions bf = new BackgroundFunctions();
-
     // endregion
 
     // region GAME OVER

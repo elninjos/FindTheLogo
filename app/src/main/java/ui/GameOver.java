@@ -32,7 +32,7 @@ public class GameOver extends AppCompatActivity {
         StaticData.no = findViewById(R.id.no);
     }
 
-    public void gameOver(){
+    public static void gameOver(){
         StaticData.firstCupBtn.setVisibility(View.INVISIBLE);
         StaticData.secondCupBtn.setVisibility(View.INVISIBLE);
         StaticData.thirdCupBtn.setVisibility(View.INVISIBLE);

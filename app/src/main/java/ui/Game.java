@@ -8,12 +8,11 @@ import android.transition.TransitionManager;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.concurrent.TimeUnit;
 
+import Logic.BackgroundFunctions;
 import Logic.StaticData;
 import nino.UI.R;
 
@@ -53,68 +52,35 @@ public class Game extends AppCompatActivity {
         StaticData.raiseCupCS = new ConstraintSet();
     }
 
-    public void newRound() throws InterruptedException {
-        clearOnNewRound();
-
-        // Clears logos sequence and make new for new game - AFTER GAME OVER
-        StaticData.bf.fillRandomSequence();
-
-
-        /*for (int numbLogo : StaticData.logosSeq){
-            int x = numbLogo; // krneki
-        }*/
-        Iterator<Integer> itr = StaticData.logosSeq.iterator();
-        if(itr.hasNext()){
-            StaticData.bf.setLogos(itr.next());
-        }
-        else {
-            // bejž u kurac
-        }
-
-        // TODO: Namesto resetVars() dej po sklopih stvari
-
+    public static void newRound() throws InterruptedException {
         // Animation becomes better
         TransitionManager.beginDelayedTransition(StaticData.layoutGame);
 
-        hideStartBtn();
-        showCups();
+        // Round by round
+        for (int numbLogo : StaticData.logosSeq){
+            clearOnNewRound();
+            BackgroundFunctions.setLogos(numbLogo);
+
+            hideStartBtn();
+            showCups();
 
 //        Thread.sleep(1000);
-        raiseCups();
+            raiseCups();
 
 //        Thread.sleep(3000);
-        releaseCups();
+            releaseCups();
 
-        //Po 3 sekundah loncke nazaj spusti
-/*        new Handler().postDelayed(new Runnable() {
-            public void run() {
-                StaticData.cupsUp = false;
-                changeCupPositionFirst("firstCup");
-                changeCupPositionFirst("secondCup");
-                changeCupPositionFirst("thirdCup");
-                changeSizeOfCup(StaticData.firstCup);
-                changeSizeOfCup(StaticData.secondCup);
-                changeSizeOfCup(StaticData.thirdCup);
-                StaticData.logo1.setVisibility(View.INVISIBLE);
-                StaticData.logo2.setVisibility(View.INVISIBLE);
-                StaticData.logo3.setVisibility(View.INVISIBLE);
-            }
-        }, 3000);*/
-
-        //Po 4 sekundah prikaže ime logotipa
-/*        new Handler().postDelayed(new Runnable() {
-            public void run() {
-                StaticData.logoName.setVisibility(View.VISIBLE);
-            }
-        }, 4000);*/
+//            Thread.sleep(1000);
+            showLogoName();
+        }
     }
 
-    private void hideStartBtn(){
+    private static void hideStartBtn(){
         StaticData.layoutGame.transitionToState(R.id.hideStartButton);
         StaticData.hideStartBtnCS.applyTo(StaticData.layoutGame);
     }
 
-    private void showCups() {
+    private static void showCups() {
         StaticData.firstCupBtn.setClickable(false);
         StaticData.secondCupBtn.setClickable(false);
         StaticData.thirdCupBtn.setClickable(false);
@@ -123,7 +89,7 @@ public class Game extends AppCompatActivity {
         StaticData.showCupsCS.applyTo(StaticData.layoutGame);
     }
 
-    private void raiseCups(){
+    private static void raiseCups(){
         // TODO: Zmanjsaj velikost kozarckov za x 0.72
         StaticData.firstCupBtn.setBackgroundResource(R.drawable.cupdown);
         StaticData.secondCupBtn.setBackgroundResource(R.drawable.cupdown);
@@ -133,7 +99,7 @@ public class Game extends AppCompatActivity {
         StaticData.cupsUpCS.applyTo(StaticData.layoutGame);
     }
 
-    private void releaseCups(){
+    private static void releaseCups(){
         StaticData.firstCupBtn.setClickable(true);
         StaticData.secondCupBtn.setClickable(true);
         StaticData.thirdCupBtn.setClickable(true);
@@ -146,7 +112,11 @@ public class Game extends AppCompatActivity {
         StaticData.cupsDownCS.applyTo(StaticData.layoutGame);
     }
 
-    public void clearOnNewRound(){
+    private static void showLogoName(){
+//        StaticData.logoName.setVisibility(View.VISIBLE);
+    }
+
+    public static void clearOnNewRound(){
         // Set logoName to invisible
         StaticData.logoName.setVisibility(View.INVISIBLE);
         StaticData.logoName.setText("");
@@ -211,6 +181,8 @@ public class Game extends AppCompatActivity {
     // region BUTTONS
 
     public void onClickStart (View view) throws InterruptedException {
+        // Clears logos sequence and make new for new game - AFTER GAME OVER
+        BackgroundFunctions.fillRandomSequence();
         newRound();
     }
 

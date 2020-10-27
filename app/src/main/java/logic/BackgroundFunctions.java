@@ -1,13 +1,11 @@
 package Logic;
 
-import java.util.LinkedHashSet;
 import java.util.Random;
-
 import nino.UI.R;
 
 public class BackgroundFunctions {
 
-    public void fillRandomSequence(){
+    public static void fillRandomSequence(){
         StaticData.logosSeq.clear();
 
         Random rand = new Random();
@@ -16,7 +14,7 @@ public class BackgroundFunctions {
         }
     }
 
-    public void setLogos(int rand){
+    public static void setLogos(int rand){
         StaticData.randLogo = (int) (Math.random() * 3 + 1);
 
         // TODO: se da optimizirat tko da nimaš 10 casov ampak če pride randNumb 3 daš x + "3" + 1
