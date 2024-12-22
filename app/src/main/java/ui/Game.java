@@ -3,24 +3,27 @@ package UI;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintSet;
+import android.support.constraint.motion.MotionLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.transition.TransitionManager;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import java.util.concurrent.TimeUnit;
 
-import Logic.BackgroundFunctions;
+import java.util.LinkedHashSet;
+
+import Logic.Round;
 import Logic.StaticData;
+import Models.GameData;
+import Models.ImageData;
 import nino.UI.R;
 
-public class Game extends AppCompatActivity {
+public class Game extends AppCompatActivity  {
+    MotionLayout layoutGame;
+    private Round round;
+    private GameData gameData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
 
         // FULLSCREEN
@@ -31,111 +34,51 @@ public class Game extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         init();
+        start();
     }
 
     private void init(){
-        StaticData.layoutGame = findViewById(R.id.layoutGame);
-        StaticData.firstCupBtn = findViewById(R.id.firstCupBtn);
-        StaticData.secondCupBtn = findViewById(R.id.secondCupBtn);
-        StaticData.thirdCupBtn = findViewById(R.id.thirdCupBtn);
-        StaticData.startBtn = findViewById(R.id.startBtn);
-        StaticData.logoName = findViewById(R.id.logoName);
-        StaticData.logo1 = findViewById(R.id.logo1);
-        StaticData.logo2 = findViewById(R.id.logo2);
-        StaticData.logo3 = findViewById(R.id.logo3);
-        StaticData.logosSeq = new LinkedHashSet<Integer>();
-        StaticData.startGameCS = StaticData.layoutGame.getConstraintSet(R.id.startGame);
-        StaticData.hideStartBtnCS = StaticData.layoutGame.getConstraintSet(R.id.hideStartButton);
-        StaticData.showCupsCS = StaticData.layoutGame.getConstraintSet(R.id.showCups);
-        StaticData.cupsUpCS = StaticData.layoutGame.getConstraintSet(R.id.cupsUp);
-        StaticData.cupsDownCS = StaticData.layoutGame.getConstraintSet(R.id.cupsDown);
-        StaticData.raiseCupCS = new ConstraintSet();
+        layoutGame = findViewById(R.id.layoutGame);
+        gameData = new GameData(
+                layoutGame,
+                findViewById(R.id.firstCupBtn),
+                findViewById(R.id.secondCupBtn),
+                findViewById(R.id.thirdCupBtn),
+                findViewById(R.id.startBtn),
+                findViewById(R.id.logoName),
+                findViewById(R.id.logo1),
+                findViewById(R.id.logo2),
+                findViewById(R.id.logo3),
+                new LinkedHashSet<Integer>(),
+                new ImageData[10],
+                layoutGame.getConstraintSet(R.id.startGame),
+                layoutGame.getConstraintSet(R.id.hideStartButton),
+                layoutGame.getConstraintSet(R.id.showCups),
+                layoutGame.getConstraintSet(R.id.cupsUp),
+                layoutGame.getConstraintSet(R.id.cupsDown),
+                new ConstraintSet(),
+                false,
+                false,
+                false,
+                false,
+                false
+        );
+        round = new Round(gameData);
     }
 
-    public static void newRound() throws InterruptedException {
-        // Animation becomes better
-        TransitionManager.beginDelayedTransition(StaticData.layoutGame);
-
-        // Round by round
-        for (int numbLogo : StaticData.logosSeq){
-            clearOnNewRound();
-            BackgroundFunctions.setLogos(numbLogo);
-
-            hideStartBtn();
-            showCups();
-
-//        Thread.sleep(1000);
-            raiseCups();
-
-//        Thread.sleep(3000);
-            releaseCups();
-
-//            Thread.sleep(1000);
-            showLogoName();
-        }
+    public void start() {
+        round.prepare();
     }
 
-    private static void hideStartBtn(){
-        StaticData.layoutGame.transitionToState(R.id.hideStartButton);
-        StaticData.hideStartBtnCS.applyTo(StaticData.layoutGame);
+    public void end() {
+        round = null;
     }
 
-    private static void showCups() {
-        StaticData.firstCupBtn.setClickable(false);
-        StaticData.secondCupBtn.setClickable(false);
-        StaticData.thirdCupBtn.setClickable(false);
+//    public AssetManager GetAssets() {
+//        return context.getAssets();
+//    }
 
-        StaticData.layoutGame.transitionToState(R.id.showCups);
-        StaticData.showCupsCS.applyTo(StaticData.layoutGame);
-    }
-
-    private static void raiseCups(){
-        // TODO: Zmanjsaj velikost kozarckov za x 0.72
-        StaticData.firstCupBtn.setBackgroundResource(R.drawable.cupdown);
-        StaticData.secondCupBtn.setBackgroundResource(R.drawable.cupdown);
-        StaticData.thirdCupBtn.setBackgroundResource(R.drawable.cupdown);
-
-        StaticData.layoutGame.transitionToState(R.id.cupsUp);
-        StaticData.cupsUpCS.applyTo(StaticData.layoutGame);
-    }
-
-    private static void releaseCups(){
-        StaticData.firstCupBtn.setClickable(true);
-        StaticData.secondCupBtn.setClickable(true);
-        StaticData.thirdCupBtn.setClickable(true);
-
-        StaticData.firstCupBtn.setBackgroundResource(R.drawable.cupup);
-        StaticData.secondCupBtn.setBackgroundResource(R.drawable.cupup);
-        StaticData.thirdCupBtn.setBackgroundResource(R.drawable.cupup);
-
-        StaticData.layoutGame.transitionToState(R.id.cupsDown);
-        StaticData.cupsDownCS.applyTo(StaticData.layoutGame);
-    }
-
-    private static void showLogoName(){
-//        StaticData.logoName.setVisibility(View.VISIBLE);
-    }
-
-    public static void clearOnNewRound(){
-        // Set logoName to invisible
-        StaticData.logoName.setVisibility(View.INVISIBLE);
-        StaticData.logoName.setText("");
-
-        // Make logos invisible
-        StaticData.logo1.setVisibility(View.INVISIBLE);
-        StaticData.logo2.setVisibility(View.INVISIBLE);
-        StaticData.logo3.setVisibility(View.INVISIBLE);
-
-        StaticData.firstCupClicked = false;
-        StaticData.secondCupClicked = false;
-        StaticData.thirdCupClicked = false;
-        StaticData.correctLogo = false;
-
-        // Reset results
-        StaticData.gameFinished = false;
-    }
-
-/*    public void checkLogo() {
+    /*    public void checkLogo() {
         // TODO: Problem je v tem ker je asinhrono, šele po 3 sekundah gre v run metodo
         new Handler().postDelayed(new Runnable() {
             public void run() {
@@ -180,10 +123,8 @@ public class Game extends AppCompatActivity {
 
     // region BUTTONS
 
-    public void onClickStart (View view) throws InterruptedException {
-        // Clears logos sequence and make new for new game - AFTER GAME OVER
-        BackgroundFunctions.fillRandomSequence();
-        newRound();
+    public void onClickStart (View view) {
+        round.start();
     }
 
     public void onClickCup(View view) {
