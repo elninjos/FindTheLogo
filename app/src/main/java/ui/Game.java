@@ -20,7 +20,6 @@ import nino.UI.R;
 public class Game extends AppCompatActivity  {
     MotionLayout layoutGame;
     private Round round;
-    private GameData gameData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +38,7 @@ public class Game extends AppCompatActivity  {
 
     private void init(){
         layoutGame = findViewById(R.id.layoutGame);
-        gameData = new GameData(
+        GameData gameData = new GameData(
                 layoutGame,
                 findViewById(R.id.firstCupBtn),
                 findViewById(R.id.secondCupBtn),
@@ -49,7 +48,7 @@ public class Game extends AppCompatActivity  {
                 findViewById(R.id.logo1),
                 findViewById(R.id.logo2),
                 findViewById(R.id.logo3),
-                new LinkedHashSet<Integer>(),
+                new LinkedHashSet<>(),
                 new ImageData[10],
                 layoutGame.getConstraintSet(R.id.startGame),
                 layoutGame.getConstraintSet(R.id.hideStartButton),
